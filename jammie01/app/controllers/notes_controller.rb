@@ -28,7 +28,7 @@ class NotesController < ApplicationController
 
     respond_to do |format|
       if @note.save
-        format.html { redirect_to @note, notice: 'Note was successfully created.' }
+        format.html { redirect_to @note, notice: '投稿が保存されました.' }
         format.json { render :show, status: :created, location: @note }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class NotesController < ApplicationController
   def update
     respond_to do |format|
       if @note.update(note_params)
-        format.html { redirect_to @note, notice: 'Note was successfully updated.' }
+        format.html { redirect_to @note, notice: '投稿が更新されました' }
         format.json { render :show, status: :ok, location: @note }
       else
         format.html { render :edit }
@@ -69,6 +69,6 @@ class NotesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def note_params
-      params.require(:note).permit(:title, :content)
+      params.require(:note).permit(:title, :content, :user_id)
     end
 end
