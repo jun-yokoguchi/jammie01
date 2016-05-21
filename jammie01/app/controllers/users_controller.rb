@@ -26,10 +26,13 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-
+    file = params[:user][:image]
+    
+    @user.set_image(file)
+    
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to @user, notice: 'ユーザーが保存されました' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -41,6 +44,9 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    file = params[:user][:image]
+    @user.set_image(file)
+    
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
